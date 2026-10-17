@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Check, Info } from 'lucide-react';
 import { exercises } from '../data/exercises';
 import { useSession } from '../context/SessionContext';
@@ -7,6 +7,7 @@ import PdfExportButton from '../components/PdfExportButton';
 import VideoTutorialEmbed from '../components/VideoTutorialEmbed';
 import StepIllustration from '../components/illustrations/StepIllustration';
 import BackLink from '../components/BackLink';
+import EmptyState from '../components/EmptyState';
 
 export default function ExerciseDetailView() {
   const { id } = useParams();
@@ -15,14 +16,7 @@ export default function ExerciseDetailView() {
   const exercise = exercises.find((e) => e.id === id);
 
   if (!exercise) {
-    return (
-      <div className="text-center">
-        <p className="mb-4">We couldn't find that exercise.</p>
-        <Link to="/" className="text-terracotta-700 underline">
-          Back to start
-        </Link>
-      </div>
-    );
+    return <EmptyState message="We couldn't find that exercise." />;
   }
 
   const done = progress[exercise.id] ?? [];

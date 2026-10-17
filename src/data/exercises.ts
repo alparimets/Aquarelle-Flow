@@ -1,4 +1,4 @@
-export type Skill = 'novice' | 'beginner' | 'intermediate';
+﻿export type Skill = 'novice' | 'beginner' | 'intermediate';
 export type TimeSlot = 'quick' | 'focused' | 'weekend';
 export type Energy = 'low' | 'moderate' | 'high';
 
@@ -34,6 +34,9 @@ export interface Exercise {
   searchQuery: string;
 }
 
+const steps = (...rows: [title: string, detail: string, visual: StepVisualType][]): Step[] =>
+  rows.map(([title, detail, stepVisualType]) => ({ title, detail, stepVisualType }));
+
 const basics = [
   { name: 'Pencil' },
   { name: 'Watercolor palette' },
@@ -43,6 +46,8 @@ const basics = [
     alternative: "Standard printer paper works fine for quick technique drills if watercolor paper isn't available.",
   },
 ];
+
+const withBasics = (...extra: Exercise['materials']) => [...basics, ...extra];
 
 export const exercises: Exercise[] = [
   {
@@ -54,13 +59,13 @@ export const exercises: Exercise[] = [
     time: 'quick',
     energies: ['low', 'moderate'],
     minSkill: 'novice',
-    materials: [...basics, { name: 'Flat or round brush', alternative: 'Any soft brush will do.' }],
-    steps: [
-      { title: 'Draw a rectangle', detail: 'Lightly outline a 5×10 cm rectangle with pencil.', stepVisualType: 'pencil-grid' },
-      { title: 'Lay the first stripe', detail: 'Load the brush with rich color and paint a stripe along the top.', stepVisualType: 'wet-wash' },
-      { title: 'Add water and continue', detail: 'Dip in clean water each stripe so the color grows paler as you move down.', stepVisualType: 'gradient-fade' },
-      { title: 'Let it dry', detail: 'Rest and admire the soft fade without touching it.', stepVisualType: 'pigment-layers' },
-    ],
+    materials: withBasics({ name: 'Flat or round brush', alternative: 'Any soft brush will do.' }),
+    steps: steps(
+      ['Draw a rectangle', 'Lightly outline a 5×10 cm rectangle with pencil.', 'pencil-grid'],
+      ['Lay the first stripe', 'Load the brush with rich color and paint a stripe along the top.', 'wet-wash'],
+      ['Add water and continue', 'Dip in clean water each stripe so the color grows paler as you move down.', 'gradient-fade'],
+      ['Let it dry', 'Rest and admire the soft fade without touching it.', 'pigment-layers'],
+    ),
     palette: ['#5B7FA6', '#BBD0E6'],
     youtubeVideoId: 'SMg1RIhd8u0',
     searchQuery: 'watercolor gradient wash tutorial beginner',
@@ -74,13 +79,13 @@ export const exercises: Exercise[] = [
     time: 'quick',
     energies: ['moderate', 'high'],
     minSkill: 'novice',
-    materials: [...basics],
-    steps: [
-      { title: 'Draw a grid', detail: 'Sketch a 4×4 grid of small squares.', stepVisualType: 'pencil-grid' },
-      { title: 'Paint pure colors', detail: 'Fill the first row and column with single colors.', stepVisualType: 'wet-wash' },
-      { title: 'Mix and fill', detail: 'Fill each remaining square with a blend of its row and column colors.', stepVisualType: 'pigment-layers' },
-      { title: 'Note favorites', detail: 'Pencil a short note beside the combinations you love.', stepVisualType: 'pencil-grid' },
-    ],
+    materials: withBasics(),
+    steps: steps(
+      ['Draw a grid', 'Sketch a 4×4 grid of small squares.', 'pencil-grid'],
+      ['Paint pure colors', 'Fill the first row and column with single colors.', 'wet-wash'],
+      ['Mix and fill', 'Fill each remaining square with a blend of its row and column colors.', 'pigment-layers'],
+      ['Note favorites', 'Pencil a short note beside the combinations you love.', 'pencil-grid'],
+    ),
     palette: ['#D98A5F', '#7FA38E'],
     youtubeVideoId: 'hpcHXlLM-Hk',
     searchQuery: 'watercolor color mixing chart beginner',
@@ -94,13 +99,13 @@ export const exercises: Exercise[] = [
     time: 'focused',
     energies: ['low', 'moderate', 'high'],
     minSkill: 'beginner',
-    materials: [...basics, { name: 'Large soft brush', alternative: 'A medium round brush works too.' }],
-    steps: [
-      { title: 'Outline the horizon', detail: 'Draw a simple horizon line with pencil.', stepVisualType: 'pencil-grid' },
-      { title: 'Wet the sky', detail: 'Brush clean water across the sky area until it glistens.', stepVisualType: 'wet-wash' },
-      { title: 'Drop in color', detail: 'Touch in blues, pinks, and golds and let them spread.', stepVisualType: 'pigment-layers' },
-      { title: 'Add the landscape', detail: 'Once dry, paint a simple dark silhouette below the horizon.', stepVisualType: 'gradient-fade' },
-    ],
+    materials: withBasics({ name: 'Large soft brush', alternative: 'A medium round brush works too.' }),
+    steps: steps(
+      ['Outline the horizon', 'Draw a simple horizon line with pencil.', 'pencil-grid'],
+      ['Wet the sky', 'Brush clean water across the sky area until it glistens.', 'wet-wash'],
+      ['Drop in color', 'Touch in blues, pinks, and golds and let them spread.', 'pigment-layers'],
+      ['Add the landscape', 'Once dry, paint a simple dark silhouette below the horizon.', 'gradient-fade'],
+    ),
     palette: ['#C98FA8', '#E8B96A'],
     youtubeVideoId: 't1fsYCgT7AE',
     searchQuery: 'watercolor wet on wet sky tutorial beginner',
@@ -114,13 +119,13 @@ export const exercises: Exercise[] = [
     time: 'focused',
     energies: ['low', 'moderate'],
     minSkill: 'beginner',
-    materials: [...basics, { name: 'Round brush (size 6–8)' }],
-    steps: [
-      { title: 'Sketch the stem', detail: 'Lightly draw a curved stem with a few leaf shapes.', stepVisualType: 'pencil-grid' },
-      { title: 'First wet layer', detail: 'Paint each leaf with a pale green wash.', stepVisualType: 'wet-wash' },
-      { title: 'Layer detail', detail: 'While still damp, add darker green near the stem.', stepVisualType: 'pigment-layers' },
-      { title: 'Add blooms', detail: 'Dab in flowers using a contrasting color.', stepVisualType: 'gradient-fade' },
-    ],
+    materials: withBasics({ name: 'Round brush (size 6–8)' }),
+    steps: steps(
+      ['Sketch the stem', 'Lightly draw a curved stem with a few leaf shapes.', 'pencil-grid'],
+      ['First wet layer', 'Paint each leaf with a pale green wash.', 'wet-wash'],
+      ['Layer detail', 'While still damp, add darker green near the stem.', 'pigment-layers'],
+      ['Add blooms', 'Dab in flowers using a contrasting color.', 'gradient-fade'],
+    ),
     palette: ['#6F9A6B', '#E3A0A0'],
     youtubeVideoId: '50Cm57Q5vTg',
     searchQuery: 'loose watercolor leaves botanical tutorial beginner',
@@ -134,13 +139,13 @@ export const exercises: Exercise[] = [
     time: 'focused',
     energies: ['high'],
     minSkill: 'novice',
-    materials: [...basics, { name: 'Table salt', alternative: 'Skip it or use sea salt.' }, { name: 'Plastic wrap' }],
-    steps: [
-      { title: 'Prepare squares', detail: 'Pencil four squares on your paper.', stepVisualType: 'pencil-grid' },
-      { title: 'Salt bloom', detail: 'Paint a wet wash and sprinkle salt on top.', stepVisualType: 'wet-wash' },
-      { title: 'Wrinkle effect', detail: 'Press crumpled plastic wrap into another wet wash.', stepVisualType: 'pigment-layers' },
-      { title: 'Splatter', detail: 'Tap a loaded brush over the third square; leave the fourth for your own idea.', stepVisualType: 'gradient-fade' },
-    ],
+    materials: withBasics({ name: 'Table salt', alternative: 'Skip it or use sea salt.' }, { name: 'Plastic wrap' }),
+    steps: steps(
+      ['Prepare squares', 'Pencil four squares on your paper.', 'pencil-grid'],
+      ['Salt bloom', 'Paint a wet wash and sprinkle salt on top.', 'wet-wash'],
+      ['Wrinkle effect', 'Press crumpled plastic wrap into another wet wash.', 'pigment-layers'],
+      ['Splatter', 'Tap a loaded brush over the third square; leave the fourth for your own idea.', 'gradient-fade'],
+    ),
     palette: ['#6C8FA3', '#D9A066'],
     youtubeVideoId: 'NQ9ViXNf9q4',
     searchQuery: 'watercolor texture techniques salt plastic wrap',
@@ -154,14 +159,14 @@ export const exercises: Exercise[] = [
     time: 'weekend',
     energies: ['low', 'moderate', 'high'],
     minSkill: 'beginner',
-    materials: [...basics, { name: 'Masking tape', alternative: 'Hold paper steady with your hand.' }],
-    steps: [
-      { title: 'Plan the scene', detail: 'Sketch three bands: distant hills, middle trees, foreground.', stepVisualType: 'pencil-grid' },
-      { title: 'Paint the far layer', detail: 'Use pale, cool washes for distant hills and let dry.', stepVisualType: 'wet-wash' },
-      { title: 'Build the middle', detail: 'Add medium-value shapes for trees and fields.', stepVisualType: 'pigment-layers' },
-      { title: 'Finish the foreground', detail: 'Use your darkest, warmest colors and a few details.', stepVisualType: 'gradient-fade' },
-      { title: 'Step back', detail: 'Remove the tape and enjoy the result.', stepVisualType: 'pigment-layers' },
-    ],
+    materials: withBasics({ name: 'Masking tape', alternative: 'Hold paper steady with your hand.' }),
+    steps: steps(
+      ['Plan the scene', 'Sketch three bands: distant hills, middle trees, foreground.', 'pencil-grid'],
+      ['Paint the far layer', 'Use pale, cool washes for distant hills and let dry.', 'wet-wash'],
+      ['Build the middle', 'Add medium-value shapes for trees and fields.', 'pigment-layers'],
+      ['Finish the foreground', 'Use your darkest, warmest colors and a few details.', 'gradient-fade'],
+      ['Step back', 'Remove the tape and enjoy the result.', 'pigment-layers'],
+    ),
     palette: ['#7B9E87', '#A9BCD0'],
     searchQuery: 'layered watercolor landscape tutorial beginner',
   },
@@ -174,14 +179,14 @@ export const exercises: Exercise[] = [
     time: 'weekend',
     energies: ['moderate', 'high'],
     minSkill: 'intermediate',
-    materials: [...basics],
-    steps: [
-      { title: 'Choose a subject', detail: 'Pick something simple, like a tree or a cup.', stepVisualType: 'pencil-grid' },
-      { title: 'Warm palette', detail: 'Paint it with sunny reds and yellows.', stepVisualType: 'wet-wash' },
-      { title: 'Cool palette', detail: 'Paint it again in blues and greens.', stepVisualType: 'gradient-fade' },
-      { title: 'Muted and bold', detail: 'Make two more versions: one subdued, one vivid.', stepVisualType: 'pigment-layers' },
-      { title: 'Compare', detail: 'Lay them side by side and notice how each feels.', stepVisualType: 'pencil-grid' },
-    ],
+    materials: withBasics(),
+    steps: steps(
+      ['Choose a subject', 'Pick something simple, like a tree or a cup.', 'pencil-grid'],
+      ['Warm palette', 'Paint it with sunny reds and yellows.', 'wet-wash'],
+      ['Cool palette', 'Paint it again in blues and greens.', 'gradient-fade'],
+      ['Muted and bold', 'Make two more versions: one subdued, one vivid.', 'pigment-layers'],
+      ['Compare', 'Lay them side by side and notice how each feels.', 'pencil-grid'],
+    ),
     palette: ['#D9774F', '#5E86A8'],
     youtubeVideoId: 'aIk7nodva34',
     searchQuery: 'watercolor same subject warm cool color palettes mood',
@@ -195,14 +200,15 @@ export const exercises: Exercise[] = [
     time: 'weekend',
     energies: ['low'],
     minSkill: 'novice',
-    materials: [...basics],
-    steps: [
-      { title: 'Fold your pages', detail: 'Fold or cut paper into a small booklet.', stepVisualType: 'pencil-grid' },
-      { title: 'Wash each page', detail: 'Paint a light wash of a different color on every page.', stepVisualType: 'wet-wash' },
-      { title: 'Doodle on top', detail: 'When dry, add simple shapes and small notes.', stepVisualType: 'pigment-layers' },
-    ],
+    materials: withBasics(),
+    steps: steps(
+      ['Fold your pages', 'Fold or cut paper into a small booklet.', 'pencil-grid'],
+      ['Wash each page', 'Paint a light wash of a different color on every page.', 'wet-wash'],
+      ['Doodle on top', 'When dry, add simple shapes and small notes.', 'pigment-layers'],
+    ),
     palette: ['#B58DB0', '#8DB5A3'],
     youtubeVideoId: 'HA7SzB9bEEs',
     searchQuery: 'watercolor journal washes beginner',
   },
 ];
+

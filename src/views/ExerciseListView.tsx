@@ -3,19 +3,13 @@ import { Clock, Target } from 'lucide-react';
 import { useSession } from '../context/SessionContext';
 import FocusSwatch from '../components/FocusSwatch';
 import BackLink from '../components/BackLink';
+import EmptyState from '../components/EmptyState';
 
 export default function ExerciseListView() {
   const { results } = useSession();
 
   if (results.length === 0) {
-    return (
-      <div className="text-center">
-        <p className="mb-4">No exercises yet. Tell us how you're feeling to get started.</p>
-        <Link to="/" className="text-terracotta-700 underline">
-          Back to start
-        </Link>
-      </div>
-    );
+    return <EmptyState message="No exercises yet. Tell us how you're feeling to get started." />;
   }
 
   return (
