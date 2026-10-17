@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-paper font-sans text-slate-body antialiased;
+}
+h1, h2, h3 {
+  @apply font-serif;
+}
