@@ -24,6 +24,15 @@ export async function withRetry<T>(
   throw lastError;
 }
 
+function secureRandomInt(max: number): number {
+  const buf = new Uint32Array(1);
+  const limit = 0x100000000 - (0x100000000 % max);
+  do {
+    crypto.getRandomValues(buf);
+  } while (buf[0] >= limit);
+  return buf[0] % max;
+}
+
 export function selectExercises(prefs: Preferences): Exercise[] {
   const matches = (strict: boolean) =>
     exercises.filter(
@@ -39,6 +48,10 @@ export function selectExercises(prefs: Preferences): Exercise[] {
   if (pool.length === 0) {
     throw new Error(`No exercises available for ${JSON.stringify(prefs)}`);
   }
-  const shuffled = [...pool].sort(() => Math.random() - 0.5);
+  const shuffled = [...pool];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = secureRandomInt(i + 1);
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
   return shuffled.slice(0, Math.min(3, shuffled.length));
 }
