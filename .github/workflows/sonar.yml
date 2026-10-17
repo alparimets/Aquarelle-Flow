@@ -19,6 +19,13 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - name: Run tests with coverage
+        run: npm run test:coverage
       - name: Report missing SonarCloud token
         if: ${{ env.SONAR_TOKEN == '' }}
         run: echo "::warning::SonarCloud analysis was skipped because SONAR_TOKEN is not configured."
