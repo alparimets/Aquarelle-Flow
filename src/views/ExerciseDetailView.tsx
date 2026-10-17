@@ -65,6 +65,7 @@ export default function ExerciseDetailView() {
                 <input
                   type="checkbox"
                   className="mt-1 h-5 w-5 accent-[#8A9A86]"
+                  aria-label={s.title}
                   checked={!!done[i]}
                   onChange={() => toggleStep(exercise.id, i, exercise.steps.length)}
                 />
