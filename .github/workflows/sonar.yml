@@ -13,10 +13,14 @@ permissions:
 jobs:
   sonarcloud:
     runs-on: ubuntu-latest
+    env:
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      - name: Report missing SonarCloud token
+        if: ${{ env.SONAR_TOKEN == '' }}
+        run: echo "::warning::SonarCloud analysis was skipped because SONAR_TOKEN is not configured."
       - uses: sonarsource/sonarcloud-github-action@v3
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        if: ${{ env.SONAR_TOKEN != '' }}
