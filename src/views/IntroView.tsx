@@ -36,14 +36,14 @@ export default function IntroView() {
 
   return (
     <div className="space-y-8">
-      <section className="rounded-2xl border border-terracotta/40 bg-white p-6">
-        <h1 className="mb-3 text-3xl text-sage-dark">Welcome</h1>
+      <section className="rounded-2xl border border-terracotta-200 bg-white p-6 shadow-soft transition-all duration-300 hover:shadow-md">
+        <h1 className="mb-3 text-3xl text-sage-800 sm:text-4xl">Welcome</h1>
         <p>
           This is a quiet space to enjoy your free time through creative watercolor exploration. Tell us a little
           about today, and we'll suggest a few gentle exercises. There's no right or wrong, just paint and water.
         </p>
       </section>
-      <section className="rounded-2xl border border-sage/40 bg-white p-6">
+      <section className="rounded-2xl border border-stone-200 bg-white p-6 shadow-soft transition-all duration-300 hover:shadow-md">
         <InputForm onSubmit={handleSubmit} loading={loading} message={message} />
       </section>
     </div>

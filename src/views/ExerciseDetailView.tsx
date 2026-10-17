@@ -1,9 +1,12 @@
 import { useRef } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { Brush, Check, Info } from 'lucide-react';
+import { Check, Info } from 'lucide-react';
 import { exercises } from '../data/exercises';
 import { useSession } from '../context/SessionContext';
 import PdfExportButton from '../components/PdfExportButton';
+import VideoTutorialEmbed from '../components/VideoTutorialEmbed';
+import StepIllustration from '../components/illustrations/StepIllustration';
+import BackLink from '../components/BackLink';
 
 export default function ExerciseDetailView() {
   const { id } = useParams();
@@ -15,7 +18,7 @@ export default function ExerciseDetailView() {
     return (
       <div className="text-center">
         <p className="mb-4">We couldn't find that exercise.</p>
-        <Link to="/" className="text-terracotta underline">
+        <Link to="/" className="text-terracotta-700 underline">
           Back to start
         </Link>
       </div>
@@ -26,21 +29,24 @@ export default function ExerciseDetailView() {
   const completed = done.filter(Boolean).length;
 
   return (
-    <div>
+    <div className="mx-auto max-w-3xl">
       <div className="mb-4 flex justify-end">
         <PdfExportButton targetRef={ref} filename={exercise.id} />
       </div>
-      <div ref={ref} className="rounded-2xl bg-paper p-6">
-        <h1 className="text-3xl text-sage-dark">{exercise.title}</h1>
-        <p className="mb-2 text-sm">
+      <div ref={ref} className="rounded-2xl bg-paper p-4 sm:p-6">
+        <h1 className="text-3xl text-sage-800 sm:text-4xl">{exercise.title}</h1>
+        <p className="mb-3 mt-1 text-sm">
           Focus: {exercise.focus} · {exercise.duration}
         </p>
-        <p className="mb-6 flex items-center gap-2 rounded-lg bg-sage-light px-3 py-2 text-sm">
-          <Info size={16} aria-hidden /> This session is ephemeral; export to PDF to save your plan.
+        <p className="mb-6 flex items-center gap-2 rounded-lg bg-sage-100 px-3 py-2 text-sm">
+          <Info size={16} aria-hidden className="shrink-0" /> This session is ephemeral; export to PDF to save your
+          plan.
         </p>
 
+        <VideoTutorialEmbed videoId={exercise.youtubeVideoId} searchQuery={exercise.searchQuery} title={`${exercise.title} video demonstration`} />
+
         <h2 className="mb-2 text-xl">Materials</h2>
-        <ul className="mb-6 list-disc space-y-1 pl-6">
+        <ul className="mb-8 list-disc space-y-1 pl-6">
           {exercise.materials.map((m) => (
             <li key={m.name}>
               {m.name}
@@ -49,22 +55,22 @@ export default function ExerciseDetailView() {
           ))}
         </ul>
 
-        <h2 className="mb-2 text-xl">
+        <h2 className="mb-3 text-xl">
           Steps ({completed}/{exercise.steps.length} done)
         </h2>
         <ol className="space-y-3">
           {exercise.steps.map((s, i) => (
-            <li key={s.title} className="flex gap-4 rounded-xl border border-sage/40 bg-white p-4">
-              <div
-                className="flex h-16 w-16 shrink-0 items-center justify-center rounded-lg bg-sage-light text-sage-dark"
-                aria-hidden
-              >
-                <Brush size={28} />
+            <li
+              key={s.title}
+              className="flex flex-col gap-4 rounded-xl border border-stone-200 bg-white p-4 shadow-soft transition-all duration-300 hover:border-sage-300 hover:shadow-md sm:flex-row"
+            >
+              <div className="h-24 w-24 shrink-0 overflow-hidden rounded-lg border border-stone-200 sm:h-20 sm:w-20">
+                <StepIllustration type={s.stepVisualType} palette={exercise.palette} className="h-full w-full" />
               </div>
               <label className="flex flex-1 cursor-pointer items-start gap-3">
                 <input
                   type="checkbox"
-                  className="mt-1 h-5 w-5 accent-[#8A9A86]"
+                  className="mt-1 h-5 w-5 accent-sage-700"
                   aria-label={s.title}
                   checked={!!done[i]}
                   onChange={() => toggleStep(exercise.id, i, exercise.steps.length)}
@@ -81,9 +87,7 @@ export default function ExerciseDetailView() {
           ))}
         </ol>
       </div>
-      <Link to="/exercises" className="mt-6 inline-block text-sm text-terracotta underline">
-        Back to options
-      </Link>
+      <BackLink to="/exercises">Back to options</BackLink>
     </div>
   );
 }

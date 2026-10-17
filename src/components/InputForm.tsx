@@ -18,7 +18,7 @@ interface PillProps<T extends string> {
 function PillGroup<T extends string>({ legend, options, value, onChange }: PillProps<T>) {
   return (
     <fieldset className="mb-6">
-      <legend className="mb-2 font-medium">{legend}</legend>
+      <legend className="mb-2 font-serif text-lg text-sage-800">{legend}</legend>
       <div className="flex flex-wrap gap-2">
         {options.map((o) => (
           <button
@@ -26,10 +26,10 @@ function PillGroup<T extends string>({ legend, options, value, onChange }: PillP
             type="button"
             aria-pressed={value === o.value}
             onClick={() => onChange(o.value)}
-            className={`rounded-full border px-4 py-2 text-sm transition ${
+            className={`rounded-full border px-4 py-2 text-sm transition-all duration-300 ${
               value === o.value
-                ? 'border-sage bg-sage text-white'
-                : 'border-sage/50 bg-white hover:bg-sage-light'
+                ? 'border-sage-700 bg-sage-700 text-paper shadow-sm'
+                : 'border-stone-200 bg-white hover:border-sage-300 hover:bg-sage-50'
             }`}
           >
             {o.label}
@@ -83,14 +83,14 @@ export default function InputForm({ onSubmit, loading, message }: Props) {
         ]}
       />
       {message && (
-        <p role="status" className="mb-4 text-sm text-terracotta">
+        <p role="status" className="mb-4 text-sm text-terracotta-700">
           {message}
         </p>
       )}
       <button
         type="submit"
         disabled={loading}
-        className="inline-flex items-center gap-2 rounded-full bg-terracotta px-6 py-3 text-white transition hover:opacity-90 disabled:opacity-60"
+        className="inline-flex items-center gap-2 rounded-full bg-terracotta-600 px-6 py-3 text-white shadow-sm transition-all duration-300 hover:bg-terracotta-700 hover:shadow-md disabled:opacity-60"
       >
         {loading && <Loader2 className="animate-spin" size={18} aria-hidden />}
         {loading ? 'Mixing colors…' : 'Discover Exercises'}

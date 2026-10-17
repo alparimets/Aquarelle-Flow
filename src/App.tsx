@@ -11,17 +11,17 @@ export default function App() {
   const location = useLocation();
   return (
     <div className="min-h-screen">
-      <header className="border-b border-terracotta/30">
-        <nav className="mx-auto flex max-w-4xl items-center justify-between px-4 py-4">
-          <Link to="/" className="flex items-center gap-2 font-serif text-xl text-sage-dark">
+      <header className="border-b border-terracotta-200/60">
+        <nav className="mx-auto flex max-w-5xl items-center justify-between px-4 py-4">
+          <Link to="/" className="flex items-center gap-2 font-serif text-xl text-sage-800">
             <Palette size={22} aria-hidden /> Watercolor Creative Space
           </Link>
-          <Link to="/help" className="text-sm hover:text-terracotta">
+          <Link to="/help" className="text-sm hover:text-terracotta-700">
             Help
           </Link>
         </nav>
       </header>
-      <main className="mx-auto max-w-4xl px-4 py-8">
+      <main className="mx-auto max-w-5xl px-4 py-8">
         <ErrorBoundary key={location.pathname}>
           <AnimatePresence mode="wait">
             <motion.div

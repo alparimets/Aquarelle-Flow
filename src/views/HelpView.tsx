@@ -1,7 +1,7 @@
 export default function HelpView() {
   return (
     <div className="space-y-6">
-      <h1 className="text-3xl text-sage-dark">Help & Philosophy</h1>
+      <h1 className="text-3xl text-sage-800 sm:text-4xl">Help & Philosophy</h1>
       <section>
         <h2 className="mb-2 text-xl">Mindful creation, without perfectionism</h2>
         <p>
