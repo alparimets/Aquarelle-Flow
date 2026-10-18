@@ -3,6 +3,7 @@
   "extends": ["config:recommended", "helpers:pinGitHubActionDigestsToSemver", ":semanticCommitsDisabled"],
   "timezone": "Europe/Tallinn",
   "labels": ["dependencies"],
+  "schedule": ["before 9am every day"],
   "prConcurrentLimit": 5,
   "lockFileMaintenance": {
     "enabled": true,
