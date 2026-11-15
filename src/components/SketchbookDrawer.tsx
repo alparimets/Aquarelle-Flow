@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'motion/react';
 import { BookOpen, Trash2, X } from 'lucide-react';
 import { CATEGORIES_BY_ID, IDEAS_BY_ID, Idea } from '../data/ideas';
 import { useSketchbook } from '../context/SketchbookContext';

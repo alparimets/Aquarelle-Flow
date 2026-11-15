@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'motion/react';
 import { Feather } from 'lucide-react';
 
 export default function ArtistNote({ note }: { note: string }) {
