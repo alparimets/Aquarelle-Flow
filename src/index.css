@@ -3,18 +3,57 @@
 @tailwind utilities;
 
 body {
-  @apply bg-paper font-sans text-slate-body antialiased;
+  @apply bg-paper font-sans text-ink antialiased;
   line-height: 1.65;
-  background-image: radial-gradient(circle at 12% 8%, rgba(224, 122, 95, 0.06), transparent 40%),
-    radial-gradient(circle at 88% 92%, rgba(138, 154, 134, 0.1), transparent 45%);
-  background-attachment: fixed;
 }
+
 h1,
 h2,
 h3 {
   @apply font-serif tracking-tight;
-  line-height: 1.25;
+  line-height: 1.2;
 }
+
 :focus-visible {
-  @apply outline-2 outline-offset-2 outline-sage-600;
+  @apply outline-2 outline-offset-2 outline-sap-dark;
+}
+
+/* Cold-press paper grain laid over the whole page. */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  pointer-events: none;
+  opacity: 0.35;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.4 0 0 0 0 0.33 0 0 0 0.55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* A hand-painted dot: uneven edge, pooled pigment at the rim, a bright paper highlight. */
+.swatch-dot {
+  border-radius: 58% 42% 55% 45% / 46% 56% 44% 54%;
+  box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.07), inset -3px -4px 8px rgba(0, 0, 0, 0.12),
+    inset 3px 3px 6px rgba(255, 255, 255, 0.35), 0 2px 4px rgba(45, 42, 38, 0.18);
+}
+
+.wash-blob {
+  position: fixed;
+  z-index: 0;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+  filter: blur(6px);
+  opacity: 0.38;
+}
+
+/* Washi tape holding the card down. */
+.washi {
+  background: repeating-linear-gradient(45deg, rgba(226, 168, 86, 0.55) 0 8px, rgba(226, 168, 86, 0.38) 8px 16px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }

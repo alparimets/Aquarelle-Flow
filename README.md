@@ -1,2 +1,6 @@
 # Aquarelle-Flow
-Aquarelle Flow is a lightweight, minimalist web space designed to unlock visual expression through watercolor. By tailoring gentle brush technique drills and pigment exercises to your current time, energy, and skill level, it removes planning friction and guides you straight into the relaxing, creative joy of making marks on paper.
+Aquarelle Flow is a cozy, low-pressure watercolor idea generator. Pick a category (or let it surprise you), press **Inspire me**, and get a what-to-paint card with a composition idea, a 4-colour palette (tap a swatch to copy its hex) and a finishing-touch tip. Save favourites to your sketchbook, which is stored in your browser's localStorage.
+
+- 40 built-in ideas across 5 categories, no backend, fully client-side.
+- Data lives in `src/data/ideas.ts`; add an entry there to grow the collection.
+- `npm run dev`, `npm test`, `npm run build`. Deployed to GitHub Pages via `.github/workflows/deploy.yml`.
