@@ -21,11 +21,11 @@ export default class ErrorBoundary extends Component<Props, State> {
   render() {
     if (this.state.hasError) {
       return (
-        <div role="alert" className="mx-auto mt-16 max-w-md rounded-2xl border border-terracotta/40 bg-white p-6 text-center">
+        <div role="alert" className="mx-auto mt-16 max-w-md rounded-2xl border border-paper-edge bg-paper-card p-6 text-center shadow-card">
           <h2 className="mb-2 text-xl">Let's take a breath</h2>
-          <p className="mb-4">Something went a little sideways. Your canvas is safe, so let's try again.</p>
+          <p className="mb-4">Something went a little sideways. Your sketchbook is safe, so let's try again.</p>
           <button
-            className="rounded-full bg-sage px-5 py-2 text-white hover:bg-sage-dark"
+            className="rounded-full bg-sap-dark px-5 py-2 text-white transition-colors duration-300 hover:bg-ink"
             onClick={() => this.setState({ hasError: false })}
           >
             Try again
